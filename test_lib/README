@@ -1,0 +1,319 @@
+
+--- SAMPLE1 ---
+c:\Users\Peter\Desktop\c++\test_lib>cd c:\Users\Peter\Desktop\c++\
+
+c:\Users\Peter\Desktop\c++>cd test_lib
+
+c:\Users\Peter\Desktop\c++\test_lib>cl /EHsc /Fe:sample1.exe sample1.cpp libbgi.lib gdi32.lib comdlg32.lib uuid.lib oleaut32.lib ole32.lib user32.lib
+Microsoft (R) C/C++ Optimizing Compiler Version 19.16.27025.1 for x86
+Copyright (C) Microsoft Corporation.  著作權所有，並保留一切權利。
+
+sample1.cpp
+Microsoft (R) Incremental Linker Version 14.16.27025.1
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+/out:sample1.exe
+sample1.obj
+libbgi.lib
+gdi32.lib
+comdlg32.lib
+uuid.lib
+oleaut32.lib
+ole32.lib
+user32.lib
+
+
+c:\Users\Peter\Desktop\c++\test_lib>dir
+ 磁碟區 C 中的磁碟是 Windows
+ 磁碟區序號:  AE59-4F66
+
+ c:\Users\Peter\Desktop\c++\test_lib 的目錄
+
+2019/01/13  上午 10:13    <DIR>          .
+2019/01/13  上午 10:13    <DIR>          ..
+2009/01/27  上午 02:06            13,897 graphics.h
+2019/01/11  上午 11:05           534,340 libbgi.lib
+2019/01/11  下午 08:22            14,130 README
+2019/01/13  上午 10:06               398 sample1.cpp
+2019/01/13  上午 10:13           187,392 sample1.exe
+2019/01/13  上午 10:13             1,181 sample1.obj
+               6 個檔案         751,338 位元組
+               2 個目錄  65,123,282,944 位元組可用
+
+
+----------------- END ----------------------
+
+
+
+
+
+
+
+https://docs.microsoft.com/en-us/cpp/windows/walkthrough-creating-and-using-a-static-library-cpp?view=vs-2017
+
+Creating and Using a Static Library (C++)
+cl /c /EHsc MathFuncsLib.cpp
+to compile the code and create an object file that's named MathFuncsLib.obj
+/c option specifies compile without linking.
+
+lib MathFuncsLib.obj
+to link the code and create the static library MathFuncsLib.lib
+
+--- Creating a libbgi.lib static library ---
+
+cd c:\Users\Peter\Desktop\c++\winbgi\
+
+cl /c /EHsc drawing.cxx misc.cxx mouse.cxx palette.cxx text.cxx winthread.cxx winbgi.cxx file.cxx dibutil.cxx
+
+lib /out:libbgi.lib  drawing.obj misc.obj mouse.obj palette.obj text.obj winthread.obj winbgi.obj file.obj dibutil.obj
+------------------ END ---------------
+
+--- Using libbgi.lib to create exe ---
+cl /EHsc eyes.cpp libbgi.lib gdi32.lib comdlg32.lib uuid.lib oleaut32.lib ole32.lib user32.lib
+
+Microsoft (R) C/C++ Optimizing Compiler Version 19.16.27025.1 for x86
+Copyright (C) Microsoft Corporation.  著作權所有，並保留一切權利。
+
+eyes.cpp
+eyes.cpp(334): warning C4805: '==': 作業中不安全的混用類型 'int' 和類型 'bool'
+Microsoft (R) Incremental Linker Version 14.16.27025.1
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+/out:eyes.exe
+eyes.obj
+libbgi.lib
+gdi32.lib
+comdlg32.lib
+uuid.lib
+oleaut32.lib
+ole32.lib
+user32.lib
+------------------ END ---------------
+
+cl /EHsc /Fe:reset.exe reset.cpp english.cpp libbgi.lib gdi32.lib comdlg32.lib uuid.lib oleaut32.lib ole32.lib user32.lib
+
+
+
+
+
+
+
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community>cl /?
+Microsoft (R) C/C++ Optimizing Compiler Version 19.16.27025.1 for x86
+Copyright (C) Microsoft Corporation.  著作權所有，並保留一切權利。
+
+                         C/C++ 編譯器選項
+                              -最佳化-
+
+/O1 最佳化上限 (偏好空間)               /O2 最佳化上限 (偏好速度)
+/Ob<n> 內嵌展開 (預設 n=0)              /Od 停用最佳化 (預設)
+/Og 啟用全域最佳化                      /Oi[-] 啟用內建函式
+/Os 偏好程式碼空間                      /Ot 偏好程式碼速度
+/Ox 最佳化 (偏好速度)                   /Oy[-] 啟用框架指標省略
+/favor:<blend|ATOM> 從下列選取一種要最佳化的處理器:
+    blend - 針對數種 x86 處理器最佳化的組合
+    ATOM - Intel(R) Atom(TM) 處理器
+
+                             -程式碼產生-
+
+/Gu[-] 可確保相異函式有不同的位址       /Gw[-] 分開連結器的全域變數
+/GF 啟用唯讀字串共用                    /Gm[-] 啟用最少重建
+/Gy[-] 分開連結器的函式                 /GS[-] 啟用安全性檢查
+/GR[-] 啟用 C++ RTTI                    /GX[-] 啟用 C++ EH (同 /EHsc)
+/guard:cf[-] 啟用 CFG (控制流程防護)    /EHs 啟用 C++ EH (無 SEH 例外狀況)
+/EHa 啟用 C++ EH (含 SEH 例外狀況)      /EHc extern "C" 預設為 nothrow
+/EHr 一律會產生 noexcept 執行階段終止檢查
+/fp:<except[-]|fast|precise|strict> 選擇浮點模型:
+    except[-] - 產生程式碼時，考慮浮點例外狀況
+    fast - "fast" 浮點模型，其結果較難預測
+(按 <Return> 繼續)
+    precise - "precise" 浮點模型，其結果可以預測
+    strict - "strict" 浮點模型 (暗示 /fp:except)
+/Qfast_transcendentals 即使與 /fp:except 一起使用仍會產生內嵌 FP 內建
+/Qspectre[-] 啟用 CVE 2017-5753 的風險降低
+/Qpar[-] 啟用平行程式碼產生
+/Qpar-report:1 auto-parallelizer diagnostic; 表示平行化的迴圈
+/Qpar-report:2 auto-parallelizer diagnostic; 表示迴圈未平行化
+/Qvec-report:1 auto-vectorizer diagnostic; 表示向量化的迴圈
+/Qvec-report:2 auto-vectorizer diagnostic; 表示迴圈未向量化
+/GL[-] 啟用連結時產生程式碼             /volatile:<iso|ms> 選擇揮發性模型:
+    iso - 揮發性存取時不保證 Acquire/release 語意
+    ms  - 揮發性存取時保證 Acquire/release 語意
+/GA Windows 應用程式最佳化              /Ge 強制所有函式的堆疊檢查
+/Gs[num] 控制堆疊檢查呼叫               /Gh 啟用 _penter 函式呼叫
+/GH 啟用 _pexit 函式呼叫                /GT 產生 Fiber-Safe TLS 存取
+/RTC1 啟用快速檢查 (/RTCsu)             /RTCc 轉換成較小類型檢查
+/RTCs 堆疊框架執行階段檢查              /RTCu 未初始化的區域使用方式檢查
+/clr[:option] 對 Common Language Runtime 編譯，其中的 option 為:
+    pure - 產生 IL-only 輸出檔 (非可執行機器碼)
+    safe - 產生 IL-only 可驗證輸出檔
+    initialAppDomain - 啟用 Visual C++ 2002 的初始 AppDomain 行為
+    noAssembly - 不要產生組譯碼             nostdlib - 忽略預設的 \clr 目錄
+/Gd __cdecl 呼叫慣例                    /Gr __fastcall 呼叫慣例
+/Gz __stdcall 呼叫慣例                  /GZ 啟用堆疊檢查 (/RTCs)
+/Gv __vectorcall 呼叫慣例               /QIfist[-] 使用 FIST 代替 ftol()
+/hotpatch 針對可線上修補的影像確保函式填補
+/arch:<IA32|SSE|SSE2|AVX|AVX2> 最低 CPU 架構需求為下列其中之一:
+       IA32 - 沒有使用進階指令，且將 x87 用於浮點
+    SSE - 啟用能使用具備 SSE 功能之 CPU 提供的指令
+(按 <Return> 繼續)
+   SSE2 - (預設值) 啟用能使用具備 SSE2 功能之 CPU 提供的指令
+   AVX - 啟用能使用具備 AVX 功能之 CPU 提供的指令
+   AVX2 - 啟用能使用具備 AVX2 功能之 CPU 提供的指令
+/Qimprecise_fwaits 只會在 "try" 的邊界產生 FWAIT，不會在 "try" 的內部產生
+/Qsafe_fp_loads 產生安全的 FP 載入
+
+                              -輸出檔-
+
+/Fa[file] 指定組件清單檔                /FA[scu] 設定組件清單
+/Fd[file] 指定 .PDB 檔                  /Fe<file> 指定可執行檔
+/Fm[file] 指定對應檔                    /Fo<file> 指定目的檔
+/Fp<file> 指定先行編譯標頭檔            /Fr[file] 指定來源瀏覽器檔
+/FR[file] 指定擴充的 .SBR 檔            /Fi[file] 命名前置處理過的檔案
+/Fd: <file> 指定 .PDB 檔                /Fe: <file> 指定可執行檔
+/Fm: <file> 指定對應檔                  /Fo: <file> 指定目的檔
+/Fp: <file> 指定 .PCH 檔                /FR: <file> 指定擴充的 .SBR 檔
+/Fi: <file> 指定前置處理過的檔案
+/doc[file] 處理 XML 文件註解並選擇性指定 .xdc 檔案
+
+                              -前置處理器-
+
+/AI<dir> 加入組件搜尋路徑               /FU<file> 強制使用組件/模組
+/C 不要刪除註解                         /D<name>{=|#}<text> 定義巨集
+/E 前置處理至 stdout                    /EP 前置處理至 stdout，沒有 #line
+/P 前置處理至檔案                       /Fx 將加入的程式碼合併到檔案
+/FI<file> 指定強制的 Include 檔         /U<name> 移除預先定義的巨集
+/u 移除所有預先定義的巨集               /I<dir> 加入包含搜尋路徑
+/X 忽略 "標準位置"                      /PH 會在前置處理時產生 #pragma file_hash
+
+(按 <Return> 繼續)
+                                -語言-
+
+/std:<c++14|c++17|c++latest> C++ 標準版本
+    c++14 – ISO/IEC 14882:2014 (預設)
+    c++17 – ISO/IEC 14882:2017
+    c++latest - 最新草稿標準 (功能集可能隨時變更)
+/permissive[-] 啟用一些要編譯的不合格之程式碼 (功能集可能隨時變更) (預設為開啟)
+/Ze 啟用延伸模組 (預設)                 /Za 停用延伸模組
+/ZW 啟用 WinRT 語言延伸模組             /Zs 僅限語法檢查
+/Zc:arg1[,arg2] C++ 語言一致性，其中引數可以是:
+  forScope[-]           對範圍規則強制使用 Standard C++
+  wchar_t[-]            wchar_t 是原生類型，不是 typedef
+  auto[-]               對 auto 強制使用新的 Standard C++ 意義
+  trigraphs[-]          啟用三併詞 (預設為關閉)
+  rvalueCast[-]         強制使用 Standard C++ 明確類型轉換規則
+  strictStrings[-]      停用將字串常值轉換成 [char|wchar_t]*
+                        的功能 (預設為關閉)
+  implicitNoexcept[-]   對必要函式啟用隱含 noexcept
+  threadSafeInit[-]     啟用安全執行緒本機靜態初始設定
+  inline[-]             remove unreferenced function or data if it is
+                        COMDAT or has internal linkage only (off by default)
+  sizedDealloc[-]       enable C++14 global sized deallocation
+                        functions (on by default)
+  throwingNew[-]        假設失敗時會傳回運算子 new (預設為關閉)
+  referenceBinding[-]   暫存區不會繫結到非 const
+                        左值參考 (預設為關閉)
+  twoPhase-             停用兩階段名稱查閱
+  ternary[-]            強制為條件運算子執行 C++11 規則 (預設為關閉)
+  noexceptTypes[-]      強制執行 C++17 noexcept 規則 (在 C++17 或更新版本中，預設為開啟)
+  alignedNew[-]         啟用 C++17 動態配置的物件之對齊功能 (預設為開啟)
+/await 啟用可繼續函式延伸模組
+/constexpr:depth<N>     constexper 評估的遞迴深度限制 (預設: 512)
+/constexpr:backtrace<N> 在診斷中顯示 N 個 constexpr 評估 (預設: 10)
+/constexpr:steps<N>     在 N 個步驟之後終止 constexpr 評估 (預設: 100000)
+/Zi 啟用偵錯資訊                        /Z7 啟用舊樣式偵錯資訊
+/Zo[-] 為最佳化程式碼產生較豐富的偵錯資訊 (預設為開啟)
+(按 <Return> 繼續)
+/ZH:SHA_256             對偵錯資訊中的檔案總和檢查碼使用 SHA256 (實驗性)
+/Zp[n] 在 n-byte 界限上封裝結構         /Zl 省略 .OBJ 中的預設程式庫名稱
+/vd{0|1|2} 停用/啟用 vtordisp           /vm<x> 成員指標類型
+/ZI 啟用編輯後繼續偵錯資訊              /openmp 啟用 OpenMP 2.0 語言擴充功能
+
+                              -其他-
+
+@<file> 選項回應檔                      /?、/help 顯示這個說明訊息
+/bigobj 產生擴充的目的檔格式            /c 只有編譯，沒有連結
+/errorReport:option 將內部編譯器錯誤回報到 Microsoft
+    none - 不傳送報告                       prompt - 提示要立即傳送報告
+    queue - 在下一次 admin 登入時，提示要傳送報告 (預設)
+    send - 自動傳送報告                 /FC 在診斷中使用完整路徑名稱
+/H<num> 最大外部名稱長度                /J 預設 char 類型是 unsigned
+/MP[n] 使用最多 'n' 個處理序進行編譯    /nologo 隱藏著作權訊息
+/showIncludes 顯示 Include 檔名稱       /Tc<source file> 將檔案編譯成 .c
+/Tp<source file> 將檔案編譯成 .cpp      /TC 將所有檔案編譯成 .c
+/TP 將所有檔案編譯成 .cpp               /V<string> 設定版本字串
+/Yc[file] 建立 .PCH 檔案                /Yd 將偵錯資訊放置到每個 .OBJ
+/Yl[sym] 插入 .PCH 參考供偵錯程式庫使用 /Yu[file] 使用 .PCH 檔案
+/Y- 停用所有 PCH 選項                   /Zm<n> 最大記憶體配置 (預設的 %)
+/FS 強制使用 MSPDBSRV.EXE
+/source-charset:<iana-name>|.nnnn 設定來源字元集
+/execution-charset:<iana-name>|.nnnn 設定執行字元集
+/utf-8 將來源和執行字元集設定為 UTF-8
+/validate-charset[-] 僅驗證 UTF-8 檔案中是否為合法字元
+
+                                -連結-
+
+(按 <Return> 繼續)
+/LD 建立 .DLL                           /LDd 建立 .DLL 偵錯程式庫
+/LN 建立 .netmodule                     /F<num> 設定堆疊大小
+/link [連結器選項和程式庫]              /MD 和 MSVCRT.LIB 連結
+/MT 和 LIBCMT.LIB 連結                  /MDd 和 MSVCRTD.LIB 偵錯程式庫連結
+/MTd 和 LIBCMTD.LIB 偵錯程式庫連結
+
+                              -程式碼分析-
+
+/analyze[-] 啟用原生分析                /analyze:quiet[-] 不在主控台顯示警告
+/analyze:log<name> 將警告傳送至檔案     /analyze:autolog 記錄到 *.pftlog
+/analyze:autolog:ext<ext> 記錄到 *.<ext>/analyze:autolog- 沒有記錄檔
+/analyze:WX- 非嚴重警告                 /analyze:stacksize<num> 最大堆疊框架
+/analyze:max_paths<num> 最大路徑        /analyze:only 分析，不產生程式碼
+
+                              -診斷-
+
+/diagnostics:<args,...> 可控制診斷訊息的格式:
+             classic - 保留先前格式
+             column[-] - 列印資料行資訊
+             caret[-] - 列印資料行及來源的指示行
+/Wall 啟用所有警告                      /w   停用所有警告
+/W<n> 設定警告層級 (預設 n=1)
+/Wv:xx[.yy[.zzzzz]] 停用 xx.yy.zzzzz 版之後引入的警告
+/WX 將警告視為錯誤                      /WL 啟用一行診斷
+/wd<n> 停用警告 n                       /we<n> 將警告 n 視為錯誤
+/wo<n> 只發出一次警告 n                 /w<l><n> 針對 n 設定警告層級 1-4
+/external:I <路徑>      – 外部標頭的位置
+/external:env:<變數>     – 具有外部標頭位置的環境變數
+/external:anglebrackets – 將所有以 <> 包含的標頭都視為外部
+/external:W<n>          – 外部標頭的警告層級
+/external:templates[-]  – 跨範本具現化鏈結評估警告層級
+/sdl 啟用其他安全性功能和警告
+
+(按 <Return> 繼續)
+
+C:\Users\Peter\Desktop\c++\winbgi>lib /?
+Microsoft (R) Library Manager Version 14.16.27025.1
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+使用方式: LIB [options] [files]
+
+   選項:
+
+      /DEF[:filename]
+      /ERRORREPORT:{NONE|PROMPT|QUEUE|SEND}
+      /EXPORT:symbol
+      /EXTRACT:membername
+      /INCLUDE:symbol
+      /LIBPATH:dir
+      /LIST[:filename]
+      /LTCG
+      /MACHINE:{ARM|ARM64|EBC|X64|X86}
+      /NAME:filename
+      /NODEFAULTLIB[:library]
+      /NOLOGO
+      /OUT:filename
+      /REMOVE:membername
+      /SUBSYSTEM:{BOOT_APPLICATION|CONSOLE|EFI_APPLICATION|
+                  EFI_BOOT_SERVICE_DRIVER|EFI_ROM|EFI_RUNTIME_DRIVER|
+                  NATIVE|POSIX|WINDOWS|WINDOWSCE}[,#[.##]]
+      /VERBOSE
+      /WX[:NO]
+
