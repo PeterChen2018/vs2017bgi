@@ -45,6 +45,8 @@ int main()
 		//ShowMessages(strTemp, Result);
 		//return TRUE;
 		printf("Get Device Numbers Failed With Error Code: %x \n", Result);
+		system("pause");
+		return 0;
 	}
 	printf("Result Code: %x\n", Result);
 	printf("deviceNumber: %d\n", deviceNumber);
@@ -72,6 +74,8 @@ int main()
 		//strString.Format("Open Device Failed With Error Code:%x", Result);
 		//ShowMessages(strString, Result);
 		printf("Open Device Failed With Error Code: %x \n", Result);
+		system("pause");
+		return 0;
 	}
 	printf("Open Device \n");
 
@@ -85,6 +89,8 @@ int main()
 		//strString.Format("Get Device Axes Number Failed With Error Code: %x", Result);
 		//ShowMessages(strString, Result);
 		printf("Get Device Axes Number Failed With Error Code: %x \n", Result);
+		system("pause");
+		return 0;
 	}
 	m_ulAxisCount = AxesPerDev;
 	
@@ -105,6 +111,8 @@ int main()
 			//strString.Format("Open Axis Failed With Error Code: %x", Result);
 			//ShowMessages(strString, Result);
 			printf("Open Axis Failed With Error Code: %x \n", Result);
+			system("pause");
+			return 0;
 		}
 		// strTemp.Format("%d-Axis", AxisNumber);
 		// m_cmbAxisSel1.AddString(strTemp);
@@ -127,7 +135,9 @@ int main()
 		{
 			//strString.Format("Servo On Failed With Error Code: %x", Result);
 			//ShowMessages(strString, Result);
-			//printf("Servo On Failed With Error Code: %x \n", Result);
+			printf("Servo On Failed With Error Code: %x \n", Result);
+			system("pause");
+			return 0;
 		}
 	}
 	printf("SERVER ON \n");
@@ -141,6 +151,8 @@ int main()
 		//strString.Format("Reset axis's state failed with error Code: %x", Result);
 		//ShowMessages(strString, Result);
 		printf("Reset axis's state failed with error Code: %x \n", Result);
+		system("pause");
+		return 0;
 	}
 	printf("Reset axis's state \n");
 	
@@ -205,6 +217,8 @@ int main()
 		//strString.Format("Move Failed With Error Code: %x", Result);
 		//ShowMessages(strString, Result);
 		printf("Move Failed With Error Code: %x \n ", Result);
+		system("pause");
+		return 0;
 	}
 	printf("Movement \n");
 	Sleep(5000);
@@ -215,6 +229,8 @@ int main()
 		//strString.Format("Axis To Stop Immediately Failed  With Error Code: %x", Result);
 		//ShowMessages(strString, Result);
 		printf("Axis To Stop Immediately Failed  With Error Code: %x", Result);
+		system("pause");
+		return 0;
 	}
 	printf("Stop \n");
 	Sleep(3000);
@@ -282,6 +298,8 @@ int main()
 		//strString.Format("Move Failed With Error Code: %x", Result);
 		//ShowMessages(strString, Result);
 		printf("Move Failed With Error Code: %x \n ", Result);
+		system("pause");
+		return 0;
 	}
 	printf("Movement \n");
 	Sleep(3000);
@@ -292,6 +310,8 @@ int main()
 		//strString.Format("Axis To Stop Immediately Failed  With Error Code: %x", Result);
 		//ShowMessages(strString, Result);
 		printf("Axis To Stop Immediately Failed  With Error Code: %x", Result);
+		system("pause");
+		return 0;
 	}
 	printf("Stop \n");
 	Sleep(3000);
@@ -357,6 +377,8 @@ int main()
 			//strString.Format("Servo Off Failed With Error Code: %x", Result);
 			//ShowMessages(strString, Result);
 			printf("Servo Off Failed With Error Code: %x \n ", Result);
+			system("pause");
+			return 0;
 		}
 	}
 
@@ -374,7 +396,8 @@ int main()
 		Acm_AxGetState(m_Axishand[AxisNum], &usAxisState[AxisNum]);
 		if (usAxisState[AxisNum] == STA_AX_ERROR_STOP)
 		{
-			//Reset the axis' state. If the axis is in ErrorStop state, the state will be changed to Ready after calling this function
+			//Reset the axis' state. 
+			//If the axis is in ErrorStop state, the state will be changed to Ready after calling this function
 			Acm_AxResetError(m_Axishand[AxisNum]);
 		}
 		//To command axis to decelerate to stop.
@@ -389,7 +412,6 @@ int main()
 	Acm_DevClose(&m_Devhand);
 
 	printf("Close Device \n");
-
 
 	system("pause");
 	while (!kbhit())
